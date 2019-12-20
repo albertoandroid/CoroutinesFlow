@@ -2,6 +2,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeoutOrNull
 
 fun main(args: Array<String>){
     /*
@@ -20,7 +21,7 @@ fun main(args: Array<String>){
         }
         firstFlow().collect{value->println(value)}
     }
-    */
+
 
     runBlocking {
         println("Llamando Flow...")
@@ -29,6 +30,13 @@ fun main(args: Array<String>){
         flow.collect{value->println(value)}
         println("Collect again...")
         flow.collect{value->println(value)}
+    }
+    */
+    runBlocking {
+        withTimeoutOrNull(2500){
+            firstFlow().collect{value->println(value)}
+        }
+        println("Finalizado")
     }
 }
 
