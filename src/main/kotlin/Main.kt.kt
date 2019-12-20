@@ -10,7 +10,7 @@ fun main(args: Array<String>){
         runAsynchronous().forEach{i-> println(i)}
     }
 
-     */
+
     runBlocking {
         launch {
             for(j in 1..3){
@@ -19,6 +19,16 @@ fun main(args: Array<String>){
             }
         }
         firstFlow().collect{value->println(value)}
+    }
+    */
+
+    runBlocking {
+        println("Llamando Flow...")
+        var flow = firstFlow();
+        println("Collect...")
+        flow.collect{value->println(value)}
+        println("Collect again...")
+        flow.collect{value->println(value)}
     }
 }
 
