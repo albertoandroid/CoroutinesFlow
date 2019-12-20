@@ -46,10 +46,20 @@ fun main(args: Array<String>){
 
      */
 
+    /*
     runBlocking {
         (1..3).asFlow()
             .map{request->performRequest(request)}
             .collect{response-> println(response)}
+    }
+
+     */
+
+    runBlocking {
+        (1..3).asFlow()
+            .filter{request->request>1}
+            .map{request->performRequest(request)}
+            .collect{response->println(response)}
     }
 }
 
