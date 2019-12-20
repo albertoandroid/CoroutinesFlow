@@ -76,12 +76,57 @@ fun main(args: Array<String>){
             }
 
     }
-    */
+
     runBlocking {
         (1..3).asFlow()
             .take(2)
             .collect{response->println(response)}
     }
+
+
+
+    runBlocking {
+        var lista: List<Int> = (1..3).asFlow().toList()
+        println(lista)
+    }
+
+
+
+    runBlocking {
+        var numero = (6..90).asFlow()
+            .first()
+        println(numero)
+    }
+
+
+
+    runBlocking {
+        var resultado = (1..5).asFlow()
+            .reduce{a,b->a+b}
+        println(resultado)
+    }
+
+     */
+
+    runBlocking {
+        (1..5).asFlow()
+            .filter{
+                i->
+                println("Filtrado $i")
+                i%2==0
+            }
+            .map{
+                i->
+                println("Map $i")
+                "String $i"
+            }
+            .collect{
+                i->
+                println("Collect $i")
+            }
+    }
+
+
 
 }
 
