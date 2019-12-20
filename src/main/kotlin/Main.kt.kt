@@ -31,12 +31,17 @@ fun main(args: Array<String>){
         println("Collect again...")
         flow.collect{value->println(value)}
     }
-    */
+
     runBlocking {
         withTimeoutOrNull(2500){
             firstFlow().collect{value->println(value)}
         }
         println("Finalizado")
+    }
+    */
+    runBlocking {
+        //secondFlow().collect{value->println(value)}
+        thirdFlow().collect{value->println(value)}
     }
 }
 
@@ -66,4 +71,12 @@ fun firstFlow(): Flow<Int> = flow{
         kotlinx.coroutines.delay(1000)
         emit(i)
     }
+}
+
+fun secondFlow(): Flow<Int> {
+    return flowOf(1,2,3)
+}
+
+fun thirdFlow(): Flow<Int>{
+    return (1..3).asFlow()
 }
