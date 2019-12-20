@@ -38,10 +38,18 @@ fun main(args: Array<String>){
         }
         println("Finalizado")
     }
-    */
+
     runBlocking {
         //secondFlow().collect{value->println(value)}
         thirdFlow().collect{value->println(value)}
+    }
+
+     */
+
+    runBlocking {
+        (1..3).asFlow()
+            .map{request->performRequest(request)}
+            .collect{response-> println(response)}
     }
 }
 
@@ -79,4 +87,9 @@ fun secondFlow(): Flow<Int> {
 
 fun thirdFlow(): Flow<Int>{
     return (1..3).asFlow()
+}
+
+suspend fun performRequest(request: Int): String{
+    delay(1000)
+    return "response $request"
 }
