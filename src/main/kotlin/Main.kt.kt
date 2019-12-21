@@ -126,7 +126,7 @@ fun main(args: Array<String>){
                 println("Collect $i")
             }
     }
-     */
+
 
     runBlocking {
         val time = measureTimeMillis {
@@ -137,6 +137,20 @@ fun main(args: Array<String>){
                 kotlinx.coroutines.delay(300)
                 println(value)
             }
+        }
+        println("$time ms")
+    }
+    */
+
+    runBlocking {
+        val time = measureTimeMillis {
+            firstFlow()
+                .conflate()
+                .collect{
+                        value ->
+                    kotlinx.coroutines.delay(300)
+                    println(value)
+                }
         }
         println("$time ms")
     }
