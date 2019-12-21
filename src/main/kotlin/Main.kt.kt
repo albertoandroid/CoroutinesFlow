@@ -169,7 +169,7 @@ fun main(args: Array<String>){
         }
         println("$time ms")
     }
-    */
+
     val nums = (1..3).asFlow()
     val strs = flowOf("Uno", "Dos", "Tres")
     runBlocking {
@@ -177,9 +177,18 @@ fun main(args: Array<String>){
             a,b->"Zip: $a -> $b"
         }.collect{println(it)}
     }
+    */
+    runBlocking {
+        var ejemplo = (1..3).asFlow().map{requestFlow(it)}
+    }
 
 
+}
 
+fun requestFlow(i: Int): Flow<String> = flow{
+    emit("$i: First")
+    kotlinx.coroutines.delay(500)
+    emit("$i: Second")
 }
 
 fun show(){
