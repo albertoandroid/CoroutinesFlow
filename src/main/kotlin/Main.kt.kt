@@ -182,12 +182,22 @@ fun main(args: Array<String>){
         var ejemplo = (1..3).asFlow().map{requestFlow(it)}
     }
 
-     */
+
 
     runBlocking {
         val startTime = System.currentTimeMillis();
         (1..3).asFlow().onEach{kotlinx.coroutines.delay(100)}
             .flatMapConcat{requestFlow(it)}
+            .collect{value->
+                println("$value at ${System.currentTimeMillis() - startTime} ms from start")
+            }
+    }
+    */
+
+    runBlocking {
+        val startTime = System.currentTimeMillis();
+        (1..3).asFlow().onEach{kotlinx.coroutines.delay(100)}
+            .flatMapMerge{requestFlow(it)}
             .collect{value->
                 println("$value at ${System.currentTimeMillis() - startTime} ms from start")
             }
