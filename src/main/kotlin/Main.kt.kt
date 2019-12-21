@@ -3,6 +3,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeoutOrNull
+import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>){
     /*
@@ -106,7 +107,7 @@ fun main(args: Array<String>){
         println(resultado)
     }
 
-     */
+
 
     runBlocking {
         (1..5).asFlow()
@@ -124,6 +125,18 @@ fun main(args: Array<String>){
                 i->
                 println("Collect $i")
             }
+    }
+     */
+
+    runBlocking {
+        val time = measureTimeMillis {
+            firstFlow().collect{
+                value ->
+                kotlinx.coroutines.delay(300)
+                println(value)
+            }
+        }
+        println("$time ms")
     }
 
 
@@ -153,7 +166,7 @@ suspend fun runAsynchronous(): List<Int>{
 
 fun firstFlow(): Flow<Int> = flow{
     for(i in 1..3){
-        kotlinx.coroutines.delay(1000)
+        kotlinx.coroutines.delay(100)
         emit(i)
     }
 }
