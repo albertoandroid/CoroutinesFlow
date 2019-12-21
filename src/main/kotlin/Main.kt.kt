@@ -154,7 +154,7 @@ fun main(args: Array<String>){
         }
         println("$time ms")
     }
-    */
+
 
 
     runBlocking {
@@ -168,6 +168,14 @@ fun main(args: Array<String>){
                 }
         }
         println("$time ms")
+    }
+    */
+    val nums = (1..3).asFlow()
+    val strs = flowOf("Uno", "Dos", "Tres")
+    runBlocking {
+        nums.zip(strs){
+            a,b->"Zip: $a -> $b"
+        }.collect{println(it)}
     }
 
 
